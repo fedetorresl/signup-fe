@@ -1,7 +1,7 @@
 import { ComponentPropsWithoutRef, ForwardedRef, forwardRef } from "react";
+import { twMerge } from "tailwind-merge";
 
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/solid";
-import { tw } from "../tw";
 
 export interface InputProps extends ComponentPropsWithoutRef<"input"> {
   id: string;
@@ -30,11 +30,11 @@ export const Input = forwardRef(
     ref: ForwardedRef<HTMLInputElement>
   ) => (
     <div className="relative">
-      <label className="text-blue-200 text-xs">{title}</label>
+      <label className="text-techieGray text-xs">{title}</label>
       <div
-        className={tw(
+        className={twMerge(
           "flex items-center border-b bg-white",
-          error ? "border-b-red-500" : "border-b-black"
+          error ? "border-b-complementaryRed-600" : "border-b-black"
         )}
       >
         <div className="p-2">
@@ -46,7 +46,7 @@ export const Input = forwardRef(
           <input
             id={id}
             ref={ref}
-            className="h-12 text-sm font-manrope bg-white border-none outline-none p-2 flex-grow text-blue-300"
+            className="h-12 text-sm font-manrope bg-white border-none outline-none p-2 flex-grow text-techieGray-900"
             type="text"
             placeholder={placeholder}
             {...rest}
@@ -56,7 +56,7 @@ export const Input = forwardRef(
             <input
               id={id}
               ref={ref}
-              className="h-12 text-sm  font-manrope bg-white border-none outline-none p-2 flex-grow text-[#1C202E]"
+              className="h-12 text-sm  font-manrope bg-white border-none outline-none p-2 flex-grow text-techieGray-900"
               type={isPasswordShown ? "text" : "password"}
               placeholder={placeholder}
               {...rest}
@@ -73,7 +73,9 @@ export const Input = forwardRef(
           </>
         )}
       </div>
-      {error && <span className="text-xs text-red-500">{error}</span>}
+      {error && (
+        <span className="text-xs text-complementaryRed-700">{error}</span>
+      )}
     </div>
   )
 );

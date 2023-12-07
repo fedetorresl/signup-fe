@@ -7,23 +7,19 @@ export default {
   theme: {
     extend: {
       colors: {
-        blue: {
-          100: '#458FF6',
-          200: '#5A5F70',
-          300: '#1C202E'
+        techieGray: {
+          600: '#5A5F70',
+          700: '#3F4559',
+          900: '#1C202E',
         },
-        gray: {
-          100: '#3F4559',
-        },
-        red: {
-          100: '#EF4444'
+        complementaryRed: {
+          500: '#EF4444',
+          600: '#DC2626',
+          700: '#B91C1C',
         },
         background: {
           100: '#FEF2F2'
         },
-        error: {
-          100: '#DC2626'
-        }
       },
       fontFamily: {
         ubuntu: ["Ubuntu", "sans-serif"],

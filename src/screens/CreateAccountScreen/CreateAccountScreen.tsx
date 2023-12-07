@@ -91,12 +91,12 @@ export const CreateAccountScreen = () => {
         />
         {!isSubmitted ? (
           <div className="w-full h-full lg:w-2/5 lg:p-10">
-            <h1 className="text-gray-100 font-ubuntu text-3xl font-medium leading-9 pb-4">
+            <h1 className="text-techieGray-700 font-ubuntu text-3xl font-medium leading-9 pb-4">
               Sign up
             </h1>
-            <p className="text-blue-200 font-manrope text-base font-normal tracking-wider leading-8">
+            <p className="text-techieGray font-manrope text-base font-normal tracking-wider leading-8">
               If you already have an account registered <br /> You can{" "}
-              <span className="text-red-100 font-bold underline">
+              <span className="text-complementaryRed-500 font-bold underline">
                 Login here!
               </span>
             </p>
@@ -149,7 +149,7 @@ export const CreateAccountScreen = () => {
               </div>
 
               <button
-                className="bg-red-100 rounded-full text-white p-2"
+                className="bg-complementaryRed-500 rounded-full text-white p-2"
                 type="submit"
               >
                 Register
