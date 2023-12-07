@@ -1,7 +1,7 @@
 import { Route, Routes, useLocation } from "react-router-dom";
 import type { Location } from "react-router-dom";
 
-import { CreateAccount } from "../screens";
+import { CreateAccountScreen } from "../screens";
 import { ROUTES } from "./routes";
 
 export const Router = () => {
@@ -12,7 +12,7 @@ export const Router = () => {
 
   return (
     <Routes location={previousLocation ?? location}>
-      <Route element={<CreateAccount />} path={ROUTES.signup} />
+      <Route element={<CreateAccountScreen />} path={ROUTES.signup} />
     </Routes>
   );
 };

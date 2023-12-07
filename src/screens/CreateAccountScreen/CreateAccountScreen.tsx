@@ -6,14 +6,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { SignUp, Logo, Letter, Lock, User } from "../../assets";
 import { Input, RegistrationMessage } from "../../components";
 
-const rMsg = "Field is Required";
+const requiredErrorMsg = "Field is Required";
 const permittedDomains = ["hotmail.com", "gmail.com", "lightit.io"];
 
 export const userSchema = z
   .object({
     email: z
       .string()
-      .min(1, rMsg)
+      .min(1, requiredErrorMsg)
       .email({
         message: "Must be a valid email",
       })
@@ -26,7 +26,7 @@ export const userSchema = z
       ),
     username: z
       .string()
-      .min(1, rMsg)
+      .min(1, requiredErrorMsg)
       .refine((username) => !/\s/.test(username), {
         message: "Username cannot contain spaces",
       })
@@ -49,7 +49,7 @@ export const userSchema = z
         message:
           "Password must contain at least one lowercase and one uppercase letter",
       }),
-    confirm_password: z.string().min(1, rMsg),
+    confirm_password: z.string().min(1, requiredErrorMsg),
   })
   .refine((data) => data.password === data.confirm_password, {
     path: ["confirm_password"],
@@ -58,15 +58,15 @@ export const userSchema = z
 
 export type UserFormValues = z.infer<typeof userSchema>;
 
-export const CreateAccount = () => {
-  const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
-  const [user, setUser] = useState<UserFormValues>();
-  const [isPasswordShown, setIsPasswordShown] = useState<boolean>(false);
+export const CreateAccountScreen = () => {
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isPasswordShown, setIsPasswordShown] = useState(false);
   const togglePasswordVisibility = () => setIsPasswordShown(!isPasswordShown);
 
   const {
     register,
     handleSubmit,
+    getValues,
     formState: { errors },
   } = useForm<UserFormValues>({
     resolver: zodResolver(userSchema),
@@ -74,7 +74,6 @@ export const CreateAccount = () => {
 
   const onSubmit: SubmitHandler<UserFormValues> = (data) => {
     setIsSubmitted(true);
-    setUser(data);
   };
 
   return (
@@ -95,7 +94,7 @@ export const CreateAccount = () => {
             <h1 className="text-gray-100 font-ubuntu text-3xl font-medium leading-9 pb-4">
               Sign up
             </h1>
-            <p className="text-[#5A5F70] font-manrope text-base font-normal tracking-wider leading-8">
+            <p className="text-blue-200 font-manrope text-base font-normal tracking-wider leading-8">
               If you already have an account registered <br /> You can{" "}
               <span className="text-red-100 font-bold underline">
                 Login here!
@@ -131,7 +130,7 @@ export const CreateAccount = () => {
                   {...register("password")}
                   error={errors.password?.message}
                   leftIcon={Lock}
-                  isPassword={true}
+                  isPassword
                   isPasswordShown={isPasswordShown}
                   togglePasswordVisibility={togglePasswordVisibility}
                 />
@@ -143,7 +142,7 @@ export const CreateAccount = () => {
                   {...register("confirm_password")}
                   error={errors.confirm_password?.message}
                   leftIcon={Lock}
-                  isPassword={true}
+                  isPassword
                   isPasswordShown={isPasswordShown}
                   togglePasswordVisibility={togglePasswordVisibility}
                 />
@@ -158,7 +157,7 @@ export const CreateAccount = () => {
             </form>
           </div>
         ) : (
-          <RegistrationMessage username={user?.username} />
+          <RegistrationMessage username={getValues("username")} />
         )}
       </div>
     </div>

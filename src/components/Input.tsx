@@ -1,6 +1,7 @@
 import { ComponentPropsWithoutRef, ForwardedRef, forwardRef } from "react";
-import VisibilityIcon from "@mui/icons-material/Visibility";
-import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+
+import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/solid";
+import { tw } from "../tw";
 
 export interface InputProps extends ComponentPropsWithoutRef<"input"> {
   id: string;
@@ -29,11 +30,12 @@ export const Input = forwardRef(
     ref: ForwardedRef<HTMLInputElement>
   ) => (
     <div className="relative">
-      <label className="text-[#5A5F70] text-xs">{title}</label>
+      <label className="text-blue-200 text-xs">{title}</label>
       <div
-        className={`flex items-center border-b bg-white ${
+        className={tw(
+          "flex items-center border-b bg-white",
           error ? "border-b-red-500" : "border-b-black"
-        }`}
+        )}
       >
         <div className="p-2">
           <span className="icon-left text-white">
@@ -44,7 +46,7 @@ export const Input = forwardRef(
           <input
             id={id}
             ref={ref}
-            className="h-12 text-sm font-manrope bg-white border-none outline-none p-2 flex-grow text-[#1C202E]"
+            className="h-12 text-sm font-manrope bg-white border-none outline-none p-2 flex-grow text-blue-300"
             type="text"
             placeholder={placeholder}
             {...rest}
@@ -61,7 +63,11 @@ export const Input = forwardRef(
             />
             <div className="p-2">
               <button type="button" onClick={togglePasswordVisibility}>
-                {isPasswordShown ? <VisibilityIcon /> : <VisibilityOffIcon />}
+                {isPasswordShown ? (
+                  <EyeIcon className="h-5 w-5" />
+                ) : (
+                  <EyeSlashIcon className="h-5 w-5" />
+                )}
               </button>
             </div>
           </>
